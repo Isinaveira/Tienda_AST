@@ -1,0 +1,20 @@
+{
+  "name": "compras",
+  "version": "1.0.0",
+  "description": "Backend compras ",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "author": "Isaac Naveira, Andrea Dacosta, Rodrigo Sifontes",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3",
+    "morgan": "^1.10.0"
+  }
+}

@@ -1,0 +1,32 @@
+###
+GET http://localhost:3002/api/compras
+
+###
+POST http://localhost:3002/api/compras
+Content-Type: application/json
+
+{
+    "id_producto":"644151798f1cb331576df8ee",
+    "producto": "Nvidia RTX 3060 12GB",
+    "quantity": "4",
+    "price": "50",
+    "name": "Isaac Naveira Comesaña",
+    "direction": "Calle Ecuador 52 6ºizq",
+    "total": "200",
+    "id_user": "6440f9982c80593693655931"
+}
+###
+GET http://localhost:3002/api/compras/641768e7104af247e9e77474
+//esto es pa q devuelva solo un producto
+###
+DELETE http://localhost:3002/api/compras/6415d23b0e42c5611b9dcb98
+//Eliminar compras
+###
+PUT http://localhost:3002/api/compras/6415cf3f2ff65370a7853383
+Content-Type: application/json
+
+{
+    "name": "Cosita",
+    "description": "chula"
+}
+//actualizar compras

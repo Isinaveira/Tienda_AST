@@ -1,0 +1,19 @@
+###
+GET http://localhost:3001/api/users
+
+###
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+    "username":"Do.rigo",
+    "role": "user"
+}
+###
+GET http://localhost:3001/api/users/6440f9a72c80593693655935
+
+###
+DELETE http://localhost:3001/api/users/643add7adcb9d372cab5230c
+//Eliminar productos
+###
+GET http://localhost:3001/api/users/role/6440f9a72c80593693655935

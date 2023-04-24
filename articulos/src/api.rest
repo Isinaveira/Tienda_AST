@@ -1,0 +1,28 @@
+###
+GET http://localhost:3000/api/productos
+
+###
+POST http://localhost:3000/api/productos
+Content-Type: application/json
+
+{
+    "name":"procesador",
+    "description": "algo",
+    "quantity": "4",
+    "price": "50"
+}
+###
+GET http://localhost:3000/api/productos/641768e7104af247e9e77474
+//esto es pa q devuelva solo un producto
+###
+DELETE http://localhost:3000/api/productos/6415d23b0e42c5611b9dcb98
+//Eliminar productos
+###
+PUT http://localhost:3000/api/productos/6415cf3f2ff65370a7853383
+Content-Type: application/json
+
+{
+    "name": "Cosita",
+    "description": "chula"
+}
+//actualizar productos
