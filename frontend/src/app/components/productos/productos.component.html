@@ -55,6 +55,7 @@
                 <tr>
                     <th>Imagen</th>
                     <th>Nombre</th>
+                    <th>Id</th>
                     <th>Descripcion</th>
                     <th>Precio</th>
                     <th>Cantidad</th>
@@ -67,6 +68,7 @@
                         <img [src]="productosService.getImageUrl(producto.image)" alt="{{producto.name}} " width="100">
                     </td>
                     <td>{{producto.name}}</td>
+                    <td>{{producto._id}}</td>
                     <td>{{producto.description}}</td>
                     <td>{{producto.price}}</td>
                     <td>{{producto.quantity}}</td>

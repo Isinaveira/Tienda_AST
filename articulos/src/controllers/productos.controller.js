@@ -34,22 +34,21 @@ productoCtrl.getProductos = async (req,res) => {
     res.json(productos);
 }
 
-productoCtrl.createProducto = (req,res)=>{
+productoCtrl.createProducto = async (req,res)=>{
     upload(req, res, (err)=>{
       if(err){
         console.log(err);
         res.json({succes: false, message:'Error al subir la imagen'});
       }else{
-        const {name, description, price, quantity} = req.body;
-        console.log(req.file);
+        
         const product = new Productos({
-            name,
-            description,
-            price,
-            quantity,
+            name : req.body.name,
+            description: req.body.description,
+            price: parseInt(req.body.price),
+            quantity: parseInt(req.body.quantity),
             image: req.file.filename
         });
-
+        
         product.save()
         .then( result =>{
             res.status(201).json({
@@ -88,19 +87,47 @@ productoCtrl.getProducto = async (req,res) => {
     res.json(producto);
 }
 
-productoCtrl.editProducto= async (req,res)=>{
-    const {id} = req.params;
-    const producto={
-        name: req.body.name,
-        description:req.body.description,
-        quantity:req.body.quantity,
-        price:req.body.price
+productoCtrl.editProducto = async (req,res) =>{
+    try{
+        const product_id = req.params.id;
+        
+        let product = {};
+        upload(req, res, async function (err){
+            if(err){
+                console.error(err);
+            return res.status(500).json({message: 'Error al cargar la imagen'});
+            }
+        
+            if(req.file){
+                product.image = req.file.filename;
+            }
+            try{
+                product.name = req.body.name;
+                product.description = req.body.description;
+                product.price = req.body.price;
+                product.quantity = req.body.quantity;
+                const updatedProduct = await Productos.findByIdAndUpdate(product_id,  product, {new: true});
+                console.log(updatedProduct);
+                if(updatedProduct){
+                    res.json({message: 'Producto actualizado correctamente'});
+                }else{
+                    res.status(404).json({message: 'Producto no encontrado'});
+                }
+            }catch(error){
+                console.log(error);
+                res.status(500).json({message: 'Error al actualizar el product'})
+            }
+        
+        
+        
+        
+    });
+    }catch(error){
+        console.error(error);
+        res.status(500).json({message: "Error al actualizar el producto"});
     }
-    await Productos.findByIdAndUpdate(id,{$set:producto },{new:true});
-    res.json({
-        status:'Producto updated'
-    })
 }
+
 
 productoCtrl.deleteProducto= async (req,res)=> {
     await Productos.findByIdAndDelete(req.params.id);

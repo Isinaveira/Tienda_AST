@@ -14,7 +14,7 @@ export class ProductosService {
     name:'',
     description:'',
     quantity:0,
-    price:'',
+    price:0,
     image :''
   };
   imagePreview: string;
@@ -49,8 +49,18 @@ export class ProductosService {
     return this.http.get(`${this.URL_API}/${_id}`);
   }
 
-  editProducto(producto: Productos){
-    return this.http.put(`${this.URL_API}/${producto._id}`,producto)
+  editProducto(formData: FormData){
+    
+    fetch(`${this.URL_API}/${formData.get('_id')}`,{
+      method: 'PUT',
+      body: formData,
+    }).then( response =>{
+      console.log(response);
+    }).catch(
+      error => console.log(error)
+    );
+    
+    //return this.http.put(`${this.URL_API}/${formData.get('_id')}`,formData)
   }
 
   get_Productos(filtro:any):Observable<any>{

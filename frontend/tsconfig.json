@@ -23,7 +23,8 @@
     "strictPropertyInitialization": false, //para que no de error cuando no inicializamos algo
     "lib": [
       "ES2022",
-      "dom"
+      "dom",
+      "DOM.Iterable"
     ]
   },
   "angularCompilerOptions": {

@@ -30,8 +30,7 @@ export class ProductosComponent implements OnInit{
   }
 
   onSubmit(productForm): void {
-    console.log(this.productosService.selectedImage);
-      if (productForm.valid) {
+      if (productForm.valid && (!this.productosService.productoSelected._id)) {
         const productData = new FormData();
         productData.append('name', this.productosService.productoSelected.name);
         productData.append('description', this.productosService.productoSelected.description);
@@ -43,11 +42,29 @@ export class ProductosComponent implements OnInit{
           {
             console.log(response); 
 
-            this.getProductos();
+            window.alert("Se ha creado correctamente el producto");
+            
           },
           (error) => console.log(error)
         );
+      }else if(this.productosService.productoSelected._id){
+        const productData = new FormData();
+        productData.append('_id', this.productosService.productoSelected._id);
+        productData.append('name', this.productosService.productoSelected.name);
+        productData.append('description', this.productosService.productoSelected.description);
+        productData.append('price', this.productosService.productoSelected.price.toString());
+        productData.append('quantity', this.productosService.productoSelected.quantity.toString());
+        if(this.productosService.selectedImage){
+          productData.append('image', this.productosService.selectedImage);
+        }
+        this.productosService.editProducto(productData);
+        
+        window.alert("Se ha actualizado correctamente el producto");
+        
+        
       }
+      productForm.reset();
+      this.getProductos();
   }
 
   editProducto(producto: Productos){
