@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="message">
+        <h1>Bienvenido a Gestión de usuarios</h1>
+    </div>
+    <div class="access-component">
+        <div class="container">
+            <form #accesoForm="ngForm" (ngSubmit)="controlAcceso()">
+                <div class="form">
+                    <label>
+                        <h2>Introduce tu ID:</h2>
+                        <input
+                         type="text"
+                         name="user_id" 
+                         [(ngModel)]="usersService.user_id"
+                         required
+                        >
+                        <div *ngIf="usersService.userSelected">
+                            <h2 *ngIf="usersService.userSelected.role==usersService.user_types.CLIENT">Bienvenido cliente ✅<hr></h2>
+                            <h2 *ngIf="usersService.userSelected.role==usersService.user_types.ADMIN">Bienvenido administrador ✅<hr></h2>
+                            <!-- <h2>{{usersService.userSelected.username}}</h2> -->
+                        </div>
+                    </label>
+                </div>
+                <div class="botones">
+                    <button class="btn btn-primary" [disabled]="accesoForm.invalid" type="submit">Entrar</button>
+                    <button class="btn btn-success" *ngIf="usersService.userSelected.role" (click)="delete = true" type="submit">Eliminar este usuario</button>
+                    <button class="btn btn-success" *ngIf="usersService.userSelected.role==usersService.user_types.ADMIN" routerLink="/consulta-users">Consultar usuarios</button>
+
+                    <button class="btn btn-success" routerLink="/create-user">Crear usuario</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

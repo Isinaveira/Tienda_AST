@@ -19,7 +19,7 @@ Content-Type: application/json
 GET http://localhost:3002/api/compras/641768e7104af247e9e77474
 //esto es pa q devuelva solo un producto
 ###
-DELETE http://localhost:3002/api/compras/6415d23b0e42c5611b9dcb98
+DELETE http://localhost:3002/api/compras/6447073c9c8c64427ee2bf73
 //Eliminar compras
 ###
 PUT http://localhost:3002/api/compras/6415cf3f2ff65370a7853383
@@ -27,6 +27,8 @@ Content-Type: application/json
 
 {
     "name": "Cosita",
-    "description": "chula"
+    "direction": "chula"
 }
-//actualizar compras
+
+###
+GET http://localhost:3002/api/compras/historial-compras/6439e24d71eae49fb06376ff

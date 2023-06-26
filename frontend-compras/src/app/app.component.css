@@ -1,0 +1,21 @@
+.header{
+    background-color: rgb(42, 10, 71);
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1.5rem;
+    padding-top: 2rem;
+}
+
+a {
+    text-decoration: none;
+    font-size: 3rem;
+    color: white;
+    font-family: 'Bruno Ace', cursive;
+}
+h1{
+    text-decoration: none;
+    margin-right: 30px;
+    font-family: 'Bruno Ace', cursive;
+}

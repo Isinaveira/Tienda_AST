@@ -1,0 +1,88 @@
+<div *ngIf="usersService.userSelected.role==usersService.user_types.ADMIN">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    
+                    <form #productosForm="ngForm" (ngSubmit)="onSubmit(productosForm)">
+                        <input type="hidden" name="_id" [(ngModel)]="productosService.productoSelected._id">
+                        <h1>Añadir nuevo producto</h1>
+                        <div class="form-group">Nombre
+                          <input type="text" class="form-control" name="name" placeholder="Nombre del producto" [(ngModel)]="productosService.productoSelected.name">  
+                        </div>
+                        <div class="form-group">Descripcion
+                            <input type="text" class="form-control" name="description" placeholder="Descripcion del producto" [(ngModel)]="productosService.productoSelected.description">  
+                        </div>
+                        <div class="form-group">Cantidad
+                            <input type="number" class="form-control" name="quantity" placeholder="Cantidad" [(ngModel)]="productosService.productoSelected.quantity">  
+                        </div>
+                        <div class="form-group">Precio
+                            <input type="number" class="form-control" name="price" placeholder="Precio" [(ngModel)]="productosService.productoSelected.price">  
+                        </div>
+                        <div class="form-group">Imagen
+                            <input type="file" id="imagen" class="form-control" name="imagen" value="Selecciona una imagen" (change)="onFileSelected($event)" accept="image/png, image/jpeg">
+                        </div>
+                        <button type="reset" class="btn btn-primary btn-sm" (click)="resetForm(productosForm)">
+                            <i class="material-icons">clear</i>
+                        </button>
+                        <button type="submit" class="btn btn-secondary btn-sm">
+                            Guardar
+                        </button>   
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h3 class="card-title">Filtro de productos</h3>
+            <form #searchForm="ngForm" (ngSubmit)="search(searchForm)">
+                <div>
+                    <input type="radio" name="typesearch" value="id" id="id" [(ngModel)]="typesearch"> <label for="id" >id</label>
+                </div>
+                <div>
+                        <input type="radio" name="typesearch" value="Nombre del comprador" id="name" [(ngModel)]="typesearch"><label for="name">Nombre del producto</label>
+                </div>
+                
+                <div class="input-group date" id="datetimepicker-minimum" data-target-input="nearest">
+                    <input type="text" class="form-control" #filtrotxt="ngModel" name="filtrotxt" [(ngModel)]="filtro" placeholder="Buscar...">
+                            <div class="input-group-append">
+                                        
+                        <button type="submit" class="btn btn-secondary btn-sm"><i class="material-icons">search</i></button>
+                            </div>
+                    </div>
+            </form>    
+            <table class="table table-striped tableFixhead">
+                <thead>
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Id</th>
+                        <th>Descripcion</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let producto of productosService.productos">
+                        <td>
+                            <img [src]="productosService.getImageUrl(producto.image)" alt="{{producto.name}} " width="100">
+                        </td>
+                        <td>{{producto.name}}</td>
+                        <td>{{producto._id}}</td>
+                        <td>{{producto.description}}</td>
+                        <td>{{producto.price}}</td>
+                        <td>{{producto.quantity}}</td>
+                        <td>
+                            <button class="btn btn-secondary btn-sm" (click)="editProducto(producto)">
+                                <i class="material-icons">edit</i></button>
+                            <button class="btn btn-danger btn-sm" (click)="deleteProducto(producto._id!)">
+                                <i class="material-icons">delete</i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

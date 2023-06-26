@@ -1,3 +1,4 @@
+const ObjectId = require('mongoose').Types.ObjectId;
 const Compra = require('../models/compras');
 const compraCtrl = {};
 
@@ -6,18 +7,37 @@ compraCtrl.getCompras = async (req,res) => {
     res.json(compras);
 }
 
-compraCtrl.getProductos = async (req, res) => {
-    const Productos = await Productos.find({});
-    res.json(Productos);
+compraCtrl.getComprasUser = async (req, res) => {
+    const id_user = req.params.id_user;
+    if(!ObjectId.isValid(id_user)) {
+        return res.status(400).json({message: "El id_user es inválido"});
+    }
+    try{
+        const compras = await Compra.find({id_user: id_user}).exec();
+        res.json(compras);
+    }catch(error){
+        return res.status(500).json({message: 'Error en el servidor'});
+    }
 }
 
-compraCtrl.editCompra = async (req,res)=>{
-    const {id} = req.params;
-    const producto={
-        direccion: req.body.direccion,
-        
+compraCtrl.getCompraByName = async(req, res)=>{
+    if(req.params['name']){
+        var name= req.params['name'];
+       const compras= await Compra.find({name: new RegExp(name,'i')}).populate('name');
+        res.json(compras); 
+    }else{
+        res.status(500).json("No has indicado un nombre")
     }
-    await Productos.findByIdAndUpdate(id,{$set:producto },{new:true});
+}
+
+
+compraCtrl.editCompra = async (req,res)=>{
+    const {id} = req.params.id;
+    const compra = {
+        direction: req.body.direction,
+        name: req.body.name
+    }
+    await Compra.findByIdAndUpdate(id,{$set:compra },{new:true});
     res.json({
         status:'Producto updated'
     })
@@ -40,7 +60,7 @@ compraCtrl.createCompra = async (req,res) => {
     .then( result =>{
         res.status(201).json({
             message: 'Compra realizada con exito!',
-            product: result
+            compra: result._id
         });
     })
     .catch( err => {
@@ -49,17 +69,18 @@ compraCtrl.createCompra = async (req,res) => {
 }
 
 compraCtrl.getCompra = async (req,res) => {
-    const Compra = await Compras.findById(req.params.id);
-    res.json(Compra);
+    const compra = await Compra.findById(req.params.id);
+    res.json(compra);
 }
 
 compraCtrl.getRole = async (req, res) => {
-    const Compra = await Compras.findById(req.params.id);
-    res.json(Compra.role);
+    const compra = await Compra.findById(req.params.id);
+    res.json(compra.role);
 }
 
+
 compraCtrl.deleteCompra = async (req,res) => {
-    await Compras.findByIdAndDelete(req.params.id);
+    await Compra.findByIdAndDelete(req.params.id);
     res.json({
         status:'Compra deleted'
     })

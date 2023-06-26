@@ -1,0 +1,11 @@
+.tableFixhead {
+    font-size: 12px;
+  }
+  .tableFixhead th,
+  .tableFixhead td {
+    width: 70%;
+    max-width: 135px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }

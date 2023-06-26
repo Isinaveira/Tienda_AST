@@ -1,0 +1,13 @@
+form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 30px
+}
+.filter{
+    text-align: center;
+}
+input[type="radio"]{
+    gap: 1.5rem
+}

@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="message">
+        <h1>Crea un usuario</h1>
+    </div>
+    <div class="access-component">
+        <div class="container">
+            <form #createUserForm="ngForm" (ngSubmit)="crearUsuario(createUserForm)">
+                <div class="form">
+                    <label>
+                        <!-- <h2>Introduce nombre de usuario:</h2>
+                        <input
+                         type="text"
+                         name="username"
+                         [(ngModel)]="usersService.userSelected.username"
+                         required
+                        > -->
+                        <select name="role" [(ngModel)]="selectedUser" required>
+                            <option value="client">Cliente</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                        <!-- <div>
+                            <h2>Introduce rol de usuario:</h2>
+                            
+                        </div> -->
+                    </label>
+                </div>
+                <div class="botones">
+                    <button class="btn btn-success" [disabled]="createUserForm.invalid" type="submit">Crear usuario</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

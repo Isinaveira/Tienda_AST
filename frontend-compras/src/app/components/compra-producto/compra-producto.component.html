@@ -1,0 +1,120 @@
+<div *ngIf="producto" class="container"> 
+  
+  <div class="product_image"> 
+    <img
+      [src]="productosService.getImageUrl(producto.image)"
+      alt="Imagen"
+    />
+  </div>
+  
+  <div class="sections">
+    <div class="section">
+        <h1>Características</h1>
+        <ul class="properties">
+          <li>
+            <h2>Nombre del producto: {{ producto.name }}</h2>
+          </li>
+          <li>
+            <h2>Id:{{ producto._id }}</h2>
+          </li>
+          <li>
+            <h2>Descripción: {{ producto.description }}</h2>
+          </li>
+          <li>
+            <h2>Precio: {{ producto.price }}€</h2>
+          </li>
+          <li>
+            <h2>Stock: {{ producto.quantity }}</h2>
+          </li>
+        </ul>
+
+    </div>
+    <div class="section">
+        
+        <form #compraForm="ngForm" (ngSubmit)="onSubmit(compraForm)">
+          <input
+            type="hidden"
+            name="id_producto"
+            [(ngModel)]="producto._id"
+          />
+          <input
+            type="hidden"
+            name="producto"
+            value="producto.name"
+            ngModel
+          />
+          <input
+            type="hidden"
+            name="price"
+            value="producto.price"
+            ngModel
+          />
+          <div class="form-group">
+            <label>
+              <h2>Id usuario: </h2>
+              <input
+              type="text"
+              class="form-control"
+              name="id_user"
+              placeholder="id del comprador"
+              (change)="compruebaCliente(compraForm)"
+              [(ngModel)] = "comprasService.compra.id_user"
+              required
+              />
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <h2>Cantidad:</h2> 
+              <input
+              type="number"
+              class="form-control"
+              name="quantity"
+              placeholder="Cantidad"             
+              min="1"
+              max="producto.quantity"
+              (change)="checkQuantity(compraForm)"
+              [(ngModel)] = "comprasService.compra.quantity"
+              required
+              />
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <h2>Direccion: </h2>
+              <input
+              type="text"
+              class="form-control"
+              name="direction"
+              placeholder="Direccion de envio"
+              [(ngModel)] = "comprasService.compra.direction"
+              required   
+              />
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <h2>Nombre: </h2>
+              <input
+              type="text"
+              class="form-control"
+              name="name"
+              placeholder="Nombre del comprador"
+              [(ngModel)] = "comprasService.compra.name"
+              required
+              />
+            </label>
+          </div>
+          <button
+            type="reset"
+            class="btn btn-secondary btn-sm"
+            (click)="resetForm(compraForm)"
+          >
+            <i class="material-icons">clear</i>
+          </button>
+          <button type="submit" [disabled]="compraForm.invalid" class="btn btn-primary btn-sm">Comprar</button>
+        </form>
+    </div>
+  </div>
+</div>
+

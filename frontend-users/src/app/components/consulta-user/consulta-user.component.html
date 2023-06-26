@@ -1,0 +1,37 @@
+<div *ngIf="usersService.userSelected.role == usersService.user_types.ADMIN">
+    <div class="row">
+        <div class="col-md-11 form">
+            <h3 class="card-title filter">Filtro de Usuarios</h3>
+            <form #searchForm="ngForm">
+                <input type="radio" name="All" id="admin" [(ngModel)]="role_selected" (change)="search()" value="All">
+                <label for="All"> All </label>
+                <input type="radio" name="admin" id="admin" [(ngModel)]="role_selected" (change)="search()" value="admin">
+                <label for="admin"> admin </label>
+                <input type="radio" name="client" id="admin" [(ngModel)]="role_selected" (change)="search()" value="client">
+                <label for="client"> client </label>
+            </form>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-striped tableFixhead">
+                <thead>
+            <tr>
+                <th>Id</th>
+                <th>Rol</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of usersService.users">
+                <td>{{user._id}}</td>
+                <td>{{user.role}}</td>
+                <td>
+                    <!-- <button class="btn btn-secondary btn-sm" (click)="editProducto(producto)">
+                        <i class="material-icons">edit</i></button> -->
+                        <button class="btn btn-danger btn-sm" (click)="deleteUser(user._id!)">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

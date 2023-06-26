@@ -1,0 +1,22 @@
+header{
+    display: flex;
+    justify-content: space-between;
+    width: 100vh;
+    background-color: rgb(75, 26, 121);
+    color: white;
+}
+
+.tableFixHead          { 
+    overflow: auto; 
+    height: 100px; 
+}
+.tableFixHead thead th { 
+    position: sticky; 
+    top: 0; 
+    z-index: 1; 
+}
+
+table{ 
+    border-collapse: collapse; 
+    width: 100%;
+}

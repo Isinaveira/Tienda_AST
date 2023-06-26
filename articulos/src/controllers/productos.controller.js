@@ -101,7 +101,7 @@ productoCtrl.editProducto = async (req,res) =>{
             if(req.file){
                 product.image = req.file.filename;
             }
-            try{
+            try{ //NO TOCAR
                 product.name = req.body.name;
                 product.description = req.body.description;
                 product.price = req.body.price;

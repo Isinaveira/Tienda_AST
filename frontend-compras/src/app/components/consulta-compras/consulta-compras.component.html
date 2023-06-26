@@ -1,0 +1,95 @@
+<div *ngIf="usersService.userSelected.role==usersService.user_types.CLIENT">
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+
+                    <form #compraForm="ngForm" (ngSubmit)="onSubmit(compraForm)">
+                        <input type="hidden" name="_id" [(ngModel)]="comprasService.compraSelected._id">
+                        <input type="hidden" name="id_producto" [(ngModel)]="comprasService.compraSelected.id_producto">
+                        <input type="hidden" name="producto" [(ngModel)]="comprasService.compraSelected.producto">
+                        <input type="hidden" name="quantity" [(ngModel)]="comprasService.compraSelected.quantity">
+                        <input type="hidden" name="price" [(ngModel)]="comprasService.compraSelected.price">
+                        <input type="hidden" name="id_user" [(ngModel)]="comprasService.compraSelected.id_user">
+
+                        <div class="form-group">Nombre del comprador
+                            <input type="text" class="form-control" name="name" placeholder="Nombre del comprador"
+                                [(ngModel)]="comprasService.compraSelected.name">
+                        </div>
+                        <div class="form-group">Dirección
+                            <input type="text" class="form-control" name="direction" placeholder="Direccion del envio"
+                                [(ngModel)]="comprasService.compraSelected.direction">
+                        </div>
+
+                        <button type="reset" class="btn btn-primary btn-sm" (click)="resetForm(compraForm)">
+                            <i class="material-icons">clear</i>
+                        </button>
+                        <button type="submit" class="btn btn-secondary btn-sm">
+                            Guardar
+                        </button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h3 class="card-title">Filtro de compras</h3>
+            <form #searchForm="ngForm" (ngSubmit)="search(searchForm)">
+                <div>
+                    <input type="radio" name="typesearch" value="id" id="id" [(ngModel)]="typesearch"> <label
+                        for="id">id</label>
+                </div>
+                <div>
+                    <input type="radio" name="typesearch" value="name" id="name" [(ngModel)]="typesearch"><label
+                        for="name">Nombre del comprador</label>
+                </div>
+
+                <div class="input-group date" id="datetimepicker-minimum" data-target-input="nearest">
+                    <input type="text" class="form-control" #filtrotxt="ngModel" name="filtrotxt" [(ngModel)]="filtro"
+                        placeholder="Buscar...">
+                    <div class="input-group-append">
+
+                        <button type="submit" class="btn btn-secondary btn-sm"><i
+                                class="material-icons">search</i></button>
+                    </div>
+                </div>
+            </form>
+            <div class="col-md-8">
+                <table class="table table-striped tableFixhead">
+                    <thead>
+                        <th>Id Compra</th>
+                        <th>Producto</th>
+                        <th>Id producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Total</th>
+                        <th>Direccion</th>
+                        <th>Comprador</th>
+                        <th>fecha</th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let compra of comprasService.compras">
+                            <td>{{compra._id}}</td>
+                            <td>{{compra.producto}}</td>
+                            <td>{{compra.id_producto}}</td>
+                            <td>{{compra.quantity}}</td>
+                            <td>{{compra.price}}</td>
+                            <td>{{compra.total}}</td>
+                            <td>{{compra.direction}}</td>
+                            <td>{{compra.name}}</td>
+                            <td>{{compra.date}}</td>
+                            <td>
+                                <button class="btn btn-secondary btn-sm" (click)="editCompra(compra)">
+                                    <i class="material-icons">edit</i></button>
+                                <button class="btn btn-danger btn-sm" (click)="deleteCompra(compra._id)">
+                                    <i class="material-icons">delete</i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>    

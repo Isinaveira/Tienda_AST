@@ -1,0 +1,52 @@
+<div *ngIf="usersService.userSelected.role==usersService.user_types.CLIENT" class="container">
+  
+  <div class="container">
+      <div class="col-md-8">
+      <h3 class="card-title">Filtro de productos</h3>
+        <form #searchForm="ngForm" (ngSubmit)="search(searchForm)">
+            <div>
+                <input type="radio" name="typesearch" value="id" id="id" [(ngModel)]="typesearch"> <label for="id" >id</label>
+            </div>
+            <div>
+                    <input type="radio" name="typesearch" value="name" id="name" [(ngModel)]="typesearch"><label for="name">Nombre del producto</label>
+            </div>
+            
+            <div class="input-group date" id="datetimepicker-minimum" data-target-input="nearest">
+                <input type="text" class="form-control filtro_field"  #filtrotxt="ngModel" name="filtrotxt" [(ngModel)]="filtro" placeholder="Buscar...">
+                        <div class="input-group-append">
+                                    
+                    <button type="submit" class="btn btn-secondary btn-sm"><i class="material-icons">search</i></button>
+                        </div>
+                </div>
+        </form> 
+ </div>
+</div>
+    <div *ngFor="let producto of comprasService.productos">
+        <mat-card class="card">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title class="producto_title">{{producto.name}}</mat-card-title>
+              <mat-card-subtitle></mat-card-subtitle>
+            </mat-card-header>
+            <div class="image">
+                <img mat-card-image [src]="productosService.getImageUrl(producto.image)" alt="{{producto.name}}">
+            </div>
+            <mat-card-content>
+              <p><b>{{producto.description}}</b></p>
+              <p><b>Stock: {{producto.quantity}}</b></p>
+              <p>Id:{{producto._id}}</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <div class="actions">
+                  <a class="sub_button" (click)="productosService.selectProducto(producto)"[routerLink]="['/compras/producto', producto._id]">
+                    <span class="material-symbols-outlined">
+                    shopping_cart
+                    </span>
+                  </a>
+                  <h1 class="price">{{producto.price}}€</h1>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
+

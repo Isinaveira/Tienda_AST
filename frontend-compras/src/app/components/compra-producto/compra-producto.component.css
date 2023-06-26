@@ -1,0 +1,12 @@
+.container{
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10%;
+}
+img{
+    max-width: 700px;
+}
+.properties{
+    width: 100%;
+}

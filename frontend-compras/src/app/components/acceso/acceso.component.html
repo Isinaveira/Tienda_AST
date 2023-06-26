@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="message">
+        <h1>Bienvenido a Gestión de compras</h1>
+    </div>
+    <div class="access-component">
+        <div class="container">
+            <form #accesoForm="ngForm" (ngSubmit)="controlAcceso()">
+                <div class="form">
+                    <label>
+                        <h2>Introduce tu ID:</h2>
+                        <input
+                         type="text"
+                         name="user_id" 
+                         [(ngModel)]="usersService.user_id"
+                         required
+                        >
+                        <h2 *ngIf="usersService.userSelected.role==usersService.user_types.CLIENT">Bienvenido cliente ✅</h2>
+                    </label>
+                </div>
+                <div class="botones">
+                    <button class="btn btn-primary" [disabled]="accesoForm.invalid" type="submit">Comprobar</button>
+                    <button class="btn btn-success" *ngIf="usersService.userSelected.role==usersService.user_types.CLIENT" routerLink="/compras">Consulta de Articulos</button>
+                    <button class="btn btn-success" *ngIf="usersService.userSelected.role==usersService.user_types.CLIENT" routerLink="/historial-compras/{{usersService.user_id}}">Consulta de Compras</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
